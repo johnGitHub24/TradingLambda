@@ -1,0 +1,30 @@
+flowchart TB
+  subgraph domain [domain]
+    O[Order]
+    OS[OrderSide enum]
+    ST2[OrderStatus enum]
+  end
+  subgraph lab_lambda [lab.lambda]
+    LB[LambdaBasics]
+  end
+  subgraph lab_func [lab.functional]
+    FI[FunctionalInterfacesLab]
+  end
+  subgraph lab_stream [lab.stream]
+    OS2[OrderStreamLab]
+  end
+  subgraph practice_pkg [practice/ 專案根]
+    PP[practice 空殼類別]
+  end
+  subgraph test [src/test]
+    TS[Lab 單元測試]
+  end
+  O --> LB
+  O --> FI
+  O --> OS2
+  OS --> O
+  ST2 --> O
+  TS --> LB
+  TS --> FI
+  TS --> OS2
+  PP -.->|mirror| LB

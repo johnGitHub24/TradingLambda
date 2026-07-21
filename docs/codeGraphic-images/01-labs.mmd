@@ -1,0 +1,13 @@
+flowchart LR
+  subgraph labs [lab/]
+    L1[LambdaBasics]
+    L2[FunctionalInterfacesLab]
+    L3[OrderStreamLab]
+  end
+  DOM[domain.Order fixture] --> L1
+  DOM --> L2
+  DOM --> L3
+  L1 --> F1[filter sort format]
+  L2 --> F2[Predicate Function Consumer]
+  L3 --> F3[filter map collect]
+  TST[src/test] --> labs

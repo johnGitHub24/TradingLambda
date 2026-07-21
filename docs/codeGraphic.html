@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradingLambda — CodeGraphic</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface2: #243044;
+      --border: #2d3a4f;
+      --text: #e6edf3;
+      --muted: #8b9cb3;
+      --accent: #3b82f6;
+      --accent2: #10b981;
+      --warn: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .top {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f1419 70%);
+      padding: 1.5rem 2rem 0;
+    }
+    .top h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .top .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.25rem; }
+    .top .links { margin-bottom: 1rem; font-size: 0.85rem; }
+    .top .links a { color: var(--accent); text-decoration: none; margin-right: 1rem; }
+    .top .links a:hover { text-decoration: underline; }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .tab {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border-bottom: none;
+    }
+    .tab:hover { color: var(--text); background: var(--surface2); }
+    .tab.active {
+      background: var(--bg);
+      color: var(--accent2);
+      border-color: var(--accent);
+      box-shadow: inset 0 2px 0 var(--accent);
+    }
+    main { padding: 1.5rem 2rem 3rem; max-width: 1100px; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .panel h2 {
+      font-size: 1.2rem;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+    .blurb {
+      color: #c9d4e3;
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+      max-width: 52rem;
+    }
+    .blurb li { margin-left: 1.1rem; margin-bottom: 0.25rem; }
+    .mermaid {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+    .note {
+      margin-top: 1rem;
+      background: var(--surface2);
+      border-left: 3px solid var(--warn);
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer {
+      padding: 0 2rem 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    @media (max-width: 700px) {
+      .top, main, footer { padding-left: 1rem; padding-right: 1rem; }
+      .tab { flex: 1 1 auto; border-radius: 8px; border-bottom: 1px solid var(--border); }
+      .tabs { gap: 0.5rem; padding-bottom: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <h1>TradingLambda — CodeGraphic</h1>
+    <p class="sub">圖為主 · Labs／Stream／Practice／套件 · Java 21 Lambda 教學</p>
+    <p class="links">
+      <a href="md-viewer.html?src=%E7%B7%B4%E7%BF%92%E5%BB%BA%E8%AD%B0.md">練習建議</a>
+      <a href="md-viewer.html?src=../TradingLambda-SPEC.md">規格書（權威）</a>
+      <a href="md-viewer.html?src=architecture.md">architecture.md</a>
+      <a href="swagger.html">介面／操作文件</a>
+    </p>
+    <nav class="tabs" role="tablist" aria-label="CodeGraphic 章節">
+      <button type="button" class="tab active" role="tab" aria-selected="true" data-tab="labs">Labs</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="stream">Stream</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="practice">Practice</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="packages">Packages</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="panel-labs" class="panel active" role="tabpanel">
+      <h2>Labs — 三個實驗室</h2>
+      <ul class="blurb">
+        <li><code>LambdaBasics</code>：Lambda 過濾、排序、格式化字串。</li>
+        <li><code>FunctionalInterfacesLab</code>：Predicate、Function、Consumer。</li>
+        <li><code>OrderStreamLab</code>：Stream filter／map／collect 聚合。</li>
+        <li>參考實作在 <code>src/main/java/.../lab/</code>；JUnit 驗證。</li>
+      </ul>
+      <div class="mermaid">
+flowchart LR
+  subgraph labs [lab/]
+    L1[LambdaBasics]
+    L2[FunctionalInterfacesLab]
+    L3[OrderStreamLab]
+  end
+  DOM[domain.Order fixture] --> L1
+  DOM --> L2
+  DOM --> L3
+  L1 --> F1[filter sort format]
+  L2 --> F2[Predicate Function Consumer]
+  L3 --> F3[filter map collect]
+  TST[src/test] --> labs
+      </div>
+      <p class="note">無常駐行程；學習流程：讀 lab → 在 practice 重寫 → 對照測試。</p>
+    </section>
+
+    <section id="panel-stream" class="panel" role="tabpanel" hidden>
+      <h2>Stream — 訂單資料流</h2>
+      <ul class="blurb">
+        <li>記憶體內 <code>List&lt;Order&gt;</code>；欄位含 side、status、quantity、price。</li>
+        <li>典型鏈：filter（條件）→ map（轉換）→ sorted → collect（toList／groupingBy）。</li>
+        <li>搭配 <code>OrderSide</code>、<code>OrderStatus</code> enum 做業務語意過濾。</li>
+      </ul>
+      <div class="mermaid">
+flowchart TB
+  LIST[List Order fixture] --> ST[stream]
+  ST --> FL{filter}
+  FL -->|BUY/SELL| MP[map transform]
+  FL -->|status NEW| MP
+  MP --> SO[sorted optional]
+  SO --> COL{collect}
+  COL --> TL[toList]
+  COL --> GB[groupingBy status]
+  COL --> SUM[reduce sum quantity]
+      </div>
+      <p class="note">設計規格：<code>docs/superpowers/specs/2026-07-11-trading-lambda-design.md</code>。</p>
+    </section>
+
+    <section id="panel-practice" class="panel" role="tabpanel" hidden>
+      <h2>Practice — 自行練習空殼</h2>
+      <ul class="blurb">
+        <li><code>practice/com/trading/lambda/practice/</code>：同簽名空殼類別。</li>
+        <li>不在 main classpath；不影響 <code>gradlew check</code>。</li>
+        <li>建議：複製 lab 方法簽名 → 自行實作 → 對照參考或加本地測試。</li>
+      </ul>
+      <div class="mermaid">
+flowchart LR
+  READ[讀 lab 參考實作] --> COPY[practice/ 同簽名空殼]
+  COPY --> IMPL[自行填寫 Lambda/Stream]
+  IMPL --> CMP{對照}
+  CMP -->|pass| DONE[掌握概念]
+  CMP -->|fail| READ
+  CHECK[gradlew check] --> MAIN[src/main lab only]
+  IMPL -.->|不進| CHECK
+      </div>
+      <p class="note">練習路線見 <code>docs/練習建議.md</code>；註解深度 detailed（<code>docs/註解規範.md</code>）。</p>
+    </section>
+
+    <section id="panel-packages" class="panel" role="tabpanel" hidden>
+      <h2>Packages — 套件地圖</h2>
+      <ul class="blurb">
+        <li>根 package：<code>com.trading.lambda</code>。</li>
+        <li>無 DB、無 Security、無外部 I/O（純記憶體練習）。</li>
+        <li>Stack：Java 21 · JUnit 5 · Gradle。</li>
+      </ul>
+      <div class="mermaid">
+flowchart TB
+  subgraph domain [domain]
+    O[Order]
+    OS[OrderSide enum]
+    ST2[OrderStatus enum]
+  end
+  subgraph lab_lambda [lab.lambda]
+    LB[LambdaBasics]
+  end
+  subgraph lab_func [lab.functional]
+    FI[FunctionalInterfacesLab]
+  end
+  subgraph lab_stream [lab.stream]
+    OS2[OrderStreamLab]
+  end
+  subgraph practice_pkg [practice/ 專案根]
+    PP[practice 空殼類別]
+  end
+  subgraph test [src/test]
+    TS[Lab 單元測試]
+  end
+  O --> LB
+  O --> FI
+  O --> OS2
+  OS --> O
+  ST2 --> O
+  TS --> LB
+  TS --> FI
+  TS --> OS2
+  PP -.->|mirror| LB
+      </div>
+      <p class="note">驗證入口：<code>.\gradlew.bat check</code>。</p>
+    </section>
+  </main>
+
+  <footer>
+    CodeGraphic · 非權威 · 衝突以 TradingLambda-SPEC 為準 · Mermaid CDN
+  </footer>
+
+  <script>
+    mermaid.initialize({ startOnLoad: false, theme: "dark", securityLevel: "loose" });
+
+    const tabs = document.querySelectorAll(".tab");
+    const panels = {
+      labs: document.getElementById("panel-labs"),
+      stream: document.getElementById("panel-stream"),
+      practice: document.getElementById("panel-practice"),
+      packages: document.getElementById("panel-packages")
+    };
+    const rendered = new Set(["labs"]);
+
+    async function renderPanel(id) {
+      if (rendered.has(id)) return;
+      const panel = panels[id];
+      const nodes = panel.querySelectorAll(".mermaid");
+      await mermaid.run({ nodes });
+      rendered.add(id);
+    }
+
+    mermaid.run({ nodes: panels.labs.querySelectorAll(".mermaid") });
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", async () => {
+        const id = tab.dataset.tab;
+        tabs.forEach((t) => {
+          t.classList.toggle("active", t === tab);
+          t.setAttribute("aria-selected", t === tab ? "true" : "false");
+        });
+        Object.entries(panels).forEach(([key, panel]) => {
+          const on = key === id;
+          panel.classList.toggle("active", on);
+          panel.hidden = !on;
+        });
+        await renderPanel(id);
+      });
+    });
+  </script>
+</body>
+</html>

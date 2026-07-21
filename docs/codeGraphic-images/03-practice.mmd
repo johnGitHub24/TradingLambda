@@ -1,0 +1,8 @@
+flowchart LR
+  READ[讀 lab 參考實作] --> COPY[practice/ 同簽名空殼]
+  COPY --> IMPL[自行填寫 Lambda/Stream]
+  IMPL --> CMP{對照}
+  CMP -->|pass| DONE[掌握概念]
+  CMP -->|fail| READ
+  CHECK[gradlew check] --> MAIN[src/main lab only]
+  IMPL -.->|不進| CHECK

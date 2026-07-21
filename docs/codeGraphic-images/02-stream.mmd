@@ -1,0 +1,10 @@
+flowchart TB
+  LIST[List Order fixture] --> ST[stream]
+  ST --> FL{filter}
+  FL -->|BUY/SELL| MP[map transform]
+  FL -->|status NEW| MP
+  MP --> SO[sorted optional]
+  SO --> COL{collect}
+  COL --> TL[toList]
+  COL --> GB[groupingBy status]
+  COL --> SUM[reduce sum quantity]
