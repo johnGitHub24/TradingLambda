@@ -1,7 +1,7 @@
 # TradingLambda Specification
 
 > **Authority contract.** Conflicts resolve to this file.  
-> EOS docs standard: EngineeringOS `eos-minimal/knowledge/documentation.md` @ 0.1.4
+> EOS docs standard: EngineeringOS `eos-minimal/knowledge/documentation.md` @ 0.1.10
 
 ## 0. Document map
 
@@ -11,7 +11,7 @@
 | [README.md](README.md) | Entry |
 | [CLAUDE.md](CLAUDE.md) | Thin AI rules |
 | [docs/architecture.md](docs/architecture.md) | Components |
-| [docs/testing.md](docs/testing.md) | Test / DoD |
+| [docs/testing.md](docs/testing.md) | Test / DoD（15 unit-layer-only Case） |
 | [docs/練習建議.md](docs/練習建議.md) | 學習路線 |
 
 ## 1. Scope
@@ -31,12 +31,17 @@
 
 ## 4. Test DoD
 
-- [x] `.\gradlew.bat check` 全綠
+- [x] `.\scripts\check.ps1` 全綠（`gradlew check`＝僅 unit）
 - [x] 每個 Lab ≥ 1 Happy Path + 1 邊界（空列表／無符合條件）
+- [x] 15 Case（CASE-LAMBDA／FUNC／STREAM）為 **unit-layer-only** 教學 labs；無 HTTP，不成對整合
 - [x] `practice/` 不導致 check 失敗
+- [x] 無 `bootRun`／`*Application.java`
+
+詳見 [docs/testing.md](docs/testing.md)。
 
 ## 5. Changelog
 
 | Date | Note |
 |------|------|
+| 2026-08-13 | Gate＝`check.ps1`；15 Case 標 unit-layer-only；EOS 0.1.10 |
 | 2026-07-11 | 初版：精簡核心 Labs + EOS 骨架 |

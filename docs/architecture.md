@@ -1,6 +1,6 @@
 # Architecture — TradingLambda
 
-> 衝突以 [TradingLambda-SPEC.md](../TradingLambda-SPEC.md) 為準。EOS @ 0.1.4
+> 衝突以 [TradingLambda-SPEC.md](../TradingLambda-SPEC.md) 為準。EOS @ 0.1.10
 
 ## Components
 
@@ -15,7 +15,8 @@
 
 ## Runtime
 
-無常駐行程。學習流程：讀 lab → 在 practice 重寫 → 對照測試／自行驗證。
+無常駐行程、無 HTTP、無 `bootRun`。學習流程：讀 lab → 在 practice 重寫 → 對照測試／自行驗證。  
+驗證：`.\scripts\check.ps1`（僅單元；Case 見 [testing.md](testing.md)）。
 
 ## Data
 

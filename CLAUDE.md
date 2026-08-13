@@ -1,16 +1,17 @@
-﻿# TradingLambda — 專案規則（薄）
+# TradingLambda — 專案規則（薄）
 
-繼承：EngineeringOS eos-minimal @ 0.1.5  
-公版路徑：`d:\ClaudeCode\EngineeringOS\eos-minimal\`  
+繼承：EngineeringOS eos-minimal @ **0.1.10**  
+公版：`EngineeringOS/eos-minimal/`  
 權威規格：[TradingLambda-SPEC.md](TradingLambda-SPEC.md)
 
 ## 與公版差異
 
 - 類型：Java Lambda／Stream 教學（非 Spring Boot 服務）
 - Stack：Java 21 · JUnit 5 · Gradle
-- 驗證入口：`.\gradlew.bat check`
+- 驗證入口：`.\scripts\check.ps1`（載入 JDK 21 後 `gradlew check`＝**僅 unit**）
+- 本機：IntelliJ／Gradle **`check`／`test`**（**無** `bootRun`、**無** `*Application.java`）
 - Docs standard：`knowledge/documentation.md`
-- 無 DB／Security（N/A）
+- 無 DB／Security／HTTP API（N/A）；Case 全為 **unit-layer-only**
 
 ## 註解深度
 

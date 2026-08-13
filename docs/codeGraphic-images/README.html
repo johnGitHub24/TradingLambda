@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Architecture — TradingLambda</title>
+  <title>CodeGraphic image export</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
     :root {
@@ -51,80 +51,43 @@
 </head>
 <body>
   <div class="bar">
-    <a href="codeGraphic.html">← CodeGraphic</a>
+    <a href="../codeGraphic.html">← CodeGraphic</a>
     <span class="badge">companion HTML</span>
-    <span class="src">來源（權威）：architecture.md</span>
+    <span class="src">來源（權威）：README.md</span>
   </div>
   <main>
-<h1>Architecture — TradingLambda</h1>
-<blockquote>
-<p>衝突以 <a href="../TradingLambda-SPEC.html">TradingLambda-SPEC.md</a> 為準。EOS @ 0.1.4</p>
-</blockquote>
-<h2>Components</h2>
+<h1>CodeGraphic image export</h1>
+<p>Source: docs/codeGraphic.html
+Tool: @mermaid-js/mermaid-cli@11 (dark)
+Script: EngineeringOS/eos-minimal/hooks/export-codeGraphic-images.ps1</p>
 <table>
 <thead>
 <tr>
-  <th>Component</th>
-  <th>Package / Path</th>
-  <th>Responsibility</th>
+  <th>File</th>
+  <th>Tab</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>Domain</td>
-  <td><code>domain</code></td>
-  <td><code>Order</code>、<code>OrderSide</code>、<code>OrderStatus</code></td>
+  <td><code>01-labs.svg</code> / <code>.png</code></td>
+  <td>Labs</td>
 </tr>
 <tr>
-  <td>Lambda lab</td>
-  <td><code>lab.lambda.LambdaBasics</code></td>
-  <td>過濾、排序、格式化字串</td>
+  <td><code>02-stream.svg</code> / <code>.png</code></td>
+  <td>Stream</td>
 </tr>
 <tr>
-  <td>Functional lab</td>
-  <td><code>lab.functional.FunctionalInterfacesLab</code></td>
-  <td>Predicate／Function／Consumer</td>
-</tr>
-<tr>
-  <td>Stream lab</td>
-  <td><code>lab.stream.OrderStreamLab</code></td>
-  <td>filter／map／collect</td>
-</tr>
-<tr>
+  <td><code>03-practice.svg</code> / <code>.png</code></td>
   <td>Practice</td>
-  <td><code>practice/</code>（專案根）</td>
-  <td>同簽名空殼，不進 main classpath</td>
 </tr>
 <tr>
-  <td>Tests</td>
-  <td><code>src/test/...</code></td>
-  <td>驗證 lab 參考實作</td>
+  <td><code>04-packages.svg</code> / <code>.png</code></td>
+  <td>Packages</td>
 </tr>
 </tbody>
 </table>
-<h2>Runtime</h2>
-<p>無常駐行程。學習流程：讀 lab → 在 practice 重寫 → 對照測試／自行驗證。</p>
-<h2>Data</h2>
-<p>記憶體內 <code>List&lt;Order&gt;</code> fixture；無 DB／外部 I/O。</p>
-<h2>Visual maps</h2>
-<table>
-<thead>
-<tr>
-  <th>文件</th>
-  <th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td><a href="codeGraphic.html">codeGraphic.html</a></td>
-  <td>Tab：Labs／Stream／Practice／Packages（圖為主）</td>
-</tr>
-<tr>
-  <td><a href="%E7%B7%B4%E7%BF%92%E5%BB%BA%E8%AD%B0.html">練習建議.md</a></td>
-  <td>學習路線與分級題</td>
-</tr>
-</tbody>
-</table>
+<p>Re-run from project root (relative hook; do not use ClaudeCode / start.ps1):</p>
+<pre><code>&amp; &quot;..\EngineeringOS\eos-minimal\hooks\export-codeGraphic-images.ps1&quot; -ProjectRoot .</code></pre>
 
   </main>
   <footer>由 eos-minimal/hooks/md-to-companion-html 產生 · 請改 .md 後重跑腳本 · 勿當權威契約</footer>

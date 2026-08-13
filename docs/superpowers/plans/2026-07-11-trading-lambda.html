@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TradingLambda 註解規範</title>
+  <title>TradingLambda Implementation Plan</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
     :root {
@@ -51,58 +51,42 @@
 </head>
 <body>
   <div class="bar">
-    <a href="codeGraphic.html">← CodeGraphic</a>
+    <a href="../../codeGraphic.html">← CodeGraphic</a>
     <span class="badge">companion HTML</span>
-    <span class="src">來源（權威）：註解規範.md</span>
+    <span class="src">來源（權威）：2026-07-11-trading-lambda.md</span>
   </div>
   <main>
-<h1>TradingLambda 註解規範</h1>
+<h1>TradingLambda Implementation Plan</h1>
 <blockquote>
-<p>權威：EngineeringOS <code>eos-minimal/knowledge/comments.md</code> @ 0.1.5<br />
-本專案宣告：<code>comment_verbosity: detailed</code></p>
+<p>歷史計畫（2026-07-11）。實作已完成；驗收以 <a href="../../../TradingLambda-SPEC.html">TradingLambda-SPEC.md</a> 與 <a href="../../testing.html">docs/testing.md</a> 為準。<br />
+勿再依「superpowers:subagent-driven-development」或他倉路徑執行。</p>
 </blockquote>
-<h2>為什麼是 detailed？</h2>
-<p>本專案是 <strong>Lambda／Stream 教學</strong>，註解要讓初學者看懂：</p>
-<ol>
-<li><strong>【職責】</strong> 這個方法在業務上做什麼</li>
-<li><strong>【技巧】</strong> 用了哪個 Java 語法／API（Lambda、方法參考、Stream…）</li>
-<li><strong>【概念】</strong> 為什麼這樣寫、和傳統 for 迴圈差在哪</li>
-</ol>
-<p>一般業務專案請改為 <code>brief</code>，避免註解過長。切換方式見公版 §7。</p>
-<h2>套用範圍</h2>
-<table>
-<thead>
-<tr>
-  <th>路徑</th>
-  <th>深度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td><code>src/main/java/**</code></td>
-  <td>detailed</td>
-</tr>
-<tr>
-  <td><code>src/test/java/**</code></td>
-  <td>detailed（含要驗證的技巧）</td>
-</tr>
-<tr>
-  <td><code>practice/**</code></td>
-  <td>detailed（題目提示＋技巧提示）</td>
-</tr>
-<tr>
-  <td><code>scripts/*.ps1</code></td>
-  <td>檔頭用途／何時跑／成功標準</td>
-</tr>
-</tbody>
-</table>
-<h2>檢查</h2>
+<p><strong>Goal:</strong> Java 21 Lambda／Stream 精簡教學專案（本 repo only）。</p>
+<p><strong>Architecture:</strong> 純 Gradle Java 庫；<code>domain</code> + 三個 <code>lab</code> 參考實作；<code>practice/</code> 空殼不進測試；驗證 <code>.\scripts\check.ps1</code>。</p>
+<p><strong>Tech Stack:</strong> Java 21 · Gradle · JUnit 5 · EngineeringOS eos-minimal @ 0.1.10</p>
+<p><strong>Spec:</strong> <code>docs/superpowers/specs/2026-07-11-trading-lambda-design.md</code></p>
+<hr />
+<h3>Task 1: Gradle scaffold + EOS 薄文件</h3>
 <ul>
-<li>[x] 每個 public 型別／方法有【職責】【技巧】【概念】（getter 可合併在類別說明）</li>
-<li>[x] 不複述「把 x 設成 y」這類廢話</li>
-<li>[x] <code>.\gradlew.bat check</code> 仍綠</li>
-<li>[x] <code>scripts/env.ps1</code> 有檔頭（用途／何時跑／成功標準）</li>
-<li>[x] <code>practice/</code> 有套件與方法提示註解</li>
+<li>[x] <strong>Step 1:</strong> <code>settings.gradle</code>／<code>build.gradle</code>（toolchain 21、JUnit 5、<code>check</code>＝<code>test</code>）</li>
+<li>[x] <strong>Step 2:</strong> EOS 薄文件（無 DB／Security／HTTP）</li>
+<li>[x] <strong>Step 3:</strong> wrapper 可執行</li>
+</ul>
+<h3>Task 2: Domain + Labs（TDD）</h3>
+<ul>
+<li>[x] <strong>Step 1:</strong> 三個 Lab 測試（15 unit-only Case）</li>
+<li>[x] <strong>Step 2:</strong> domain + lab 綠</li>
+<li>[x] <strong>Step 3:</strong> practice 空殼</li>
+<li>[x] <strong>Step 4:</strong> <code>.\scripts\check.ps1</code> 全綠</li>
+</ul>
+<h3>Task 3–4: 他倉（不做）</h3>
+<p>CodeNarc <code>scan-all</code> 與 Locust baseline <strong>不屬本 repo</strong>。本專案 Gate 僅 <code>check.ps1</code>。</p>
+<hr />
+<h2>Self-review</h2>
+<ul>
+<li>Labs／unit-layer-only DoD 已落地</li>
+<li>無 Spring／假整合測試</li>
+<li>Types: Order fields 與設計一致</li>
 </ul>
 
   </main>
