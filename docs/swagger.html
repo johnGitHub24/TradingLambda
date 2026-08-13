@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>TradingLambda — 介面／操作文件（無 HTTP API）</title>
+  <style>
+    :root { --bg:#0f1419; --surface:#1a2332; --surface2:#243044; --border:#2d3a4f; --text:#e6edf3; --muted:#8b9cb3; --accent:#3b82f6; --accent2:#10b981; --warn:#f59e0b; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:"Segoe UI","Microsoft JhengHei",sans-serif; line-height:1.6; }
+    header.intro { background:linear-gradient(135deg,#1e3a5f 0%,#0f1419 70%); padding:1.5rem 2rem; border-bottom:1px solid var(--border); }
+    header.intro h1 { font-size:1.4rem; margin:0 0 0.25rem; }
+    header.intro .sub { color:var(--muted); font-size:0.9rem; margin:0 0 1rem; }
+    header.intro .links a { color:var(--accent); text-decoration:none; margin-right:1rem; font-size:0.9rem; }
+    .banner { background:var(--surface2); border-left:3px solid var(--warn); padding:0.7rem 1rem; font-size:0.88rem; color:#e6d9b8; border-radius:0 8px 8px 0; margin:0 0 0.75rem; }
+    main { padding:1.5rem 2rem 3rem; max-width:1100px; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:0.9rem; }
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; font-size:0.88rem; }
+    .card h2 { font-size:0.95rem; color:var(--accent2); margin:0 0 0.6rem; border-bottom:1px solid var(--border); padding-bottom:0.35rem; }
+    table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+    td, th { padding:0.3rem 0.5rem 0.3rem 0; color:#c9d4e3; vertical-align:top; text-align:left; }
+    td:first-child, th:first-child { color:var(--muted); white-space:nowrap; }
+    code { background:#0d1117; color:#79c0ff; padding:0.1rem 0.35rem; border-radius:4px; font-size:0.85em; }
+    pre { background:#0d1117; border:1px solid var(--border); border-radius:8px; padding:0.8rem 1rem; overflow-x:auto; font-size:0.82rem; color:#a5d6ff; }
+    ul { margin:0; padding-left:1.1rem; color:#c9d4e3; }
+    li { margin-bottom:0.25rem; }
+    footer { padding:0 2rem 2rem; color:var(--muted); font-size:0.8rem; }
+  </style>
+</head>
+<body>
+<header class="intro">
+  <h1>TradingLambda — 介面／操作文件</h1>
+  <p class="sub">Java 21 Lambda／Stream 精簡練習（交易訂單情境）· JUnit 5 · Gradle（非 Spring Boot 服務）</p>
+  <div class="banner">
+    本專案<b>無 HTTP API，Swagger／OpenAPI 不適用</b>。「API」= 三個 Lab 的公開靜態方法（<code>src/main/java/com/trading/lambda/lab/</code>），由 JUnit 5 測試作為契約；驗證入口 <code>.\gradlew.bat check</code>。
+  </div>
+  <p class="links">
+    <a href="codeGraphic.html">CodeGraphic</a>
+    <a href="architecture.html">架構摘要</a>
+    <a href="testing.html">驗證／DoD</a>
+    <a href="練習建議.html">練習建議</a>
+    <a href="註解規範.html">註解規範</a>
+  </p>
+</header>
+<main>
+  <div class="cards">
+    <div class="card">
+      <h2>Lab 公開方法表（等同 API 表）</h2>
+      <table>
+        <tr><th>Lab／方法</th><th>簽章與用途</th></tr>
+        <tr><td><b>LambdaBasics</b></td><td>Lambda 過濾／排序／格式化</td></tr>
+        <tr><td><code>filterByStatus</code></td><td><code>(List&lt;Order&gt;, OrderStatus) → List&lt;Order&gt;</code></td></tr>
+        <tr><td><code>sortByPriceAsc</code></td><td><code>(List&lt;Order&gt;) → List&lt;Order&gt;</code></td></tr>
+        <tr><td><code>formatOrder</code></td><td><code>(Order) → String</code></td></tr>
+        <tr><td><b>FunctionalInterfacesLab</b></td><td>Predicate／Function／Consumer</td></tr>
+        <tr><td><code>fillable</code></td><td><code>() → Predicate&lt;Order&gt;</code></td></tr>
+        <tr><td><code>notional</code></td><td><code>() → Function&lt;Order, BigDecimal&gt;</code></td></tr>
+        <tr><td><code>collectInto</code></td><td><code>(List&lt;Order&gt;) → Consumer&lt;Order&gt;</code></td></tr>
+        <tr><td><code>selectFillable</code></td><td><code>(List&lt;Order&gt;) → List&lt;Order&gt;</code></td></tr>
+        <tr><td><code>mapNotionals</code></td><td><code>(List&lt;Order&gt;) → List&lt;BigDecimal&gt;</code></td></tr>
+        <tr><td><code>acceptAll</code></td><td><code>(List&lt;Order&gt;, Consumer&lt;Order&gt;) → void</code></td></tr>
+        <tr><td><b>OrderStreamLab</b></td><td>Stream filter／map／collect</td></tr>
+        <tr><td><code>pendingBuys</code></td><td><code>(List&lt;Order&gt;) → List&lt;Order&gt;</code></td></tr>
+        <tr><td><code>notionals</code></td><td><code>(List&lt;Order&gt;) → List&lt;BigDecimal&gt;</code></td></tr>
+        <tr><td><code>totalNotional</code></td><td><code>(List&lt;Order&gt;) → BigDecimal</code></td></tr>
+        <tr><td><code>groupBySymbol</code></td><td><code>(List&lt;Order&gt;) → Map&lt;String, List&lt;Order&gt;&gt;</code></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>快速開始</h2>
+      <pre>cd d:\ClaudeCode\TradingLambda
+.\gradlew.bat check   # 驗證入口（unit tests）</pre>
+    </div>
+    <div class="card">
+      <h2>主要命令</h2>
+      <ul>
+        <li>全套驗證：<code>.\gradlew.bat check</code>。</li>
+        <li>只跑單元測試：<code>.\gradlew.bat test</code>；指定 Spec：<code>--tests "*OrderStream*"</code>。</li>
+        <li>Domain：精簡 <code>Order</code>／<code>OrderSide</code>／<code>OrderStatus</code>（<code>com.trading.lambda.domain</code>）。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>產出物（練習空殼）</h2>
+      <table>
+        <tr><td>參考實作</td><td><code>src/main/java/com/trading/lambda/lab/</code>（lambda／functional／stream）</td></tr>
+        <tr><td>練習空殼</td><td><code>practice/com/trading/lambda/practice/</code>（自行填寫，不進主測試 classpath、不影響 <code>check</code>）</td></tr>
+        <tr><td>測試報告</td><td><code>build/reports/tests/</code></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>驗證方式</h2>
+      <ul>
+        <li>權威入口：<code>.\gradlew.bat check</code> 全綠（JUnit 5）。</li>
+        <li>每個 Lab 公開方法皆有對應測試作為行為契約；練習時以測試回饋驗證自己的實作。</li>
+      </ul>
+    </div>
+  </div>
+</main>
+<footer>與 HTTP 專案的 <code>docs/swagger.html</code> 對齊之介面文件入口 · 非 HTTP 專案以 Lab 公開方法／測試契約取代 OpenAPI。</footer>
+</body>
+</html>

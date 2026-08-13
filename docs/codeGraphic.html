@@ -108,8 +108,7 @@
     <p class="links">
       <a href="練習建議.html">練習建議</a>
       <a href="../TradingLambda-SPEC.html">規格書（權威）</a>
-      <a href="architecture.html">架構摘要</a>
-      <a href="testing.html">驗證／DoD</a>
+      <a href="architecture.html">architecture.md</a>
       <a href="swagger.html">介面／操作文件</a>
     </p>
     <nav class="tabs" role="tablist" aria-label="CodeGraphic 章節">
@@ -166,14 +165,14 @@ flowchart TB
   COL --> GB[groupingBy status]
   COL --> SUM[reduce sum quantity]
       </div>
-      <p class="note">設計規格：<a href="superpowers/specs/2026-07-11-trading-lambda-design.html">2026-07-11-trading-lambda-design.html</a>。</p>
+      <p class="note">設計規格：<code>docs/superpowers/specs/2026-07-11-trading-lambda-design.md</code>。</p>
     </section>
 
     <section id="panel-practice" class="panel" role="tabpanel" hidden>
       <h2>Practice — 自行練習空殼</h2>
       <ul class="blurb">
         <li><code>practice/com/trading/lambda/practice/</code>：同簽名空殼類別。</li>
-        <li>不在 main classpath；不影響 <code>.\scripts\check.ps1</code>。</li>
+        <li>不在 main classpath；不影響 <code>gradlew check</code>。</li>
         <li>建議：複製 lab 方法簽名 → 自行實作 → 對照參考或加本地測試。</li>
       </ul>
       <div class="mermaid">
@@ -183,10 +182,10 @@ flowchart LR
   IMPL --> CMP{對照}
   CMP -->|pass| DONE[掌握概念]
   CMP -->|fail| READ
-  CHECK[check.ps1] --> MAIN[src/main lab only]
+  CHECK[gradlew check] --> MAIN[src/main lab only]
   IMPL -.->|不進| CHECK
       </div>
-      <p class="note">練習路線見 <a href="練習建議.html">練習建議.html</a>；註解深度 detailed（<a href="註解規範.html">註解規範.html</a>）。</p>
+      <p class="note">練習路線見 <code>docs/練習建議.md</code>；註解深度 detailed（<code>docs/註解規範.md</code>）。</p>
     </section>
 
     <section id="panel-packages" class="panel" role="tabpanel" hidden>
@@ -228,7 +227,7 @@ flowchart TB
   TS --> OS2
   PP -.->|mirror| LB
       </div>
-      <p class="note">驗證入口：<code>.\scripts\check.ps1</code>（僅 unit；無 bootRun）。</p>
+      <p class="note">驗證入口：<code>.\gradlew.bat check</code>。</p>
     </section>
   </main>
 

@@ -40,4 +40,12 @@ Java 21 **Lambda／Stream** 精簡練習專案（交易訂單情境）。
 | [docs/練習建議.md](docs/練習建議.md) | 練習 |
 | [CLAUDE.md](CLAUDE.md) | AI 薄規則 |
 | [scripts/README.md](scripts/README.md) | 驗證／啟動腳本 |
+| [docs/swagger.html](docs/swagger.html) | **API（Swagger／介面）** |
+
+### 教學（非權威，勿刪）
+
+| 文件 | 說明 |
+|------|------|
+| [docs/練習建議.md](docs/練習建議.md) | 教學 |
+| [docs/練習建議.html](docs/練習建議.html) | 教學 |
 

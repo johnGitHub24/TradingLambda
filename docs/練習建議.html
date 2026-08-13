@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TradingLambda 練習建議</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg:#0f1419; --surface:#1a2332; --surface2:#243044; --border:#2d3a4f;
+      --text:#e6edf3; --muted:#8b9cb3; --accent:#3b82f6; --accent2:#10b981; --warn:#f59e0b;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; font-family:"Segoe UI","Microsoft JhengHei",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.65;
+    }
+    .bar {
+      position:sticky; top:0; z-index:10;
+      display:flex; flex-wrap:wrap; align-items:center; gap:0.75rem;
+      padding:0.75rem 1.25rem; background:var(--surface);
+      border-bottom:1px solid var(--border);
+    }
+    .bar a { color:var(--accent); text-decoration:none; }
+    .bar .src { color:var(--muted); font-size:0.85rem; }
+    .bar .badge {
+      font-size:0.75rem; color:var(--warn); border:1px solid var(--warn);
+      border-radius:4px; padding:0.1rem 0.45rem;
+    }
+    main { max-width:880px; margin:0 auto; padding:1.5rem 1.25rem 3rem; }
+    h1,h2,h3,h4 { line-height:1.3; }
+    h1 { font-size:1.7rem; border-bottom:2px solid var(--accent); padding-bottom:0.4rem; }
+    h2 { font-size:1.3rem; margin-top:1.75rem; border-bottom:1px solid var(--border); padding-bottom:0.3rem; }
+    h3 { font-size:1.1rem; margin-top:1.25rem; color:var(--accent2); }
+    a { color:var(--accent); }
+    code, pre { font-family:Consolas,"Courier New",monospace; }
+    code { background:var(--surface2); padding:0.1rem 0.35rem; border-radius:4px; font-size:0.9em; }
+    pre { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1rem; overflow-x:auto; }
+    pre code { background:transparent; padding:0; }
+    table { border-collapse:collapse; width:100%; margin:1rem 0; font-size:0.92rem; }
+    th, td { border:1px solid var(--border); padding:0.45rem 0.65rem; text-align:left; }
+    th { background:var(--surface2); }
+    blockquote {
+      margin:1rem 0; padding:0.5rem 0.9rem; border-left:3px solid var(--warn);
+      background:var(--surface2); color:var(--muted);
+    }
+    .mermaid { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:1rem; overflow-x:auto; }
+    hr { border:none; border-top:1px solid var(--border); margin:1.5rem 0; }
+    footer { max-width:880px; margin:0 auto; padding:0 1.25rem 2rem; color:var(--muted); font-size:0.8rem; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <a href="codeGraphic.html">← CodeGraphic</a>
+    <span class="badge">companion HTML</span>
+    <span class="src">來源（權威）：練習建議.md</span>
+  </div>
+  <main>
+<h1>TradingLambda 練習建議</h1>
+<blockquote>
+<p>衝突以 <a href="../TradingLambda-SPEC.html">TradingLambda-SPEC.md</a> 為準。</p>
+</blockquote>
+<h2>目標</h2>
+<p>完成本練習後，你應能：用 Lambda 過濾／排序訂單、用 Predicate／Function／Consumer 表達意圖、用 Stream 做 filter／map／collect。</p>
+<h2>建議路線（約 1～2 小時）</h2>
+<table>
+<thead>
+<tr>
+  <th>步驟</th>
+  <th>動作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>閱讀 <code>domain/Order</code> 與三個 Lab 的方法簽名</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>跑 <code>.\gradlew.bat check</code> 確認參考實作綠燈</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>打開 <code>practice/</code> 空殼，依註解自行實作（可先抄再改）</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>對照 <code>src/test</code> 理解斷言意圖</td>
+</tr>
+</tbody>
+</table>
+<h2>題目對照</h2>
+<table>
+<thead>
+<tr>
+  <th>Lab</th>
+  <th>練習重點</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>LambdaBasics</td>
+  <td>status 過濾、price 排序、格式化字串</td>
+</tr>
+<tr>
+  <td>FunctionalInterfacesLab</td>
+  <td>可成交 Predicate、名目金額 Function、收集 Consumer</td>
+</tr>
+<tr>
+  <td>OrderStreamLab</td>
+  <td>買進＋PENDING、名目金額 map、總額／依 symbol 分組</td>
+</tr>
+</tbody>
+</table>
+
+  </main>
+  <footer>由 eos-minimal/hooks/md-to-companion-html 產生 · 請改 .md 後重跑腳本 · 勿當權威契約</footer>
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: "dark", securityLevel: "loose" });
+  </script>
+</body>
+</html>

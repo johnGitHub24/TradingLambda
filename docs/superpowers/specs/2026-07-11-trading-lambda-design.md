@@ -1,13 +1,12 @@
 # TradingLambda 設計規格
 
 > 日期：2026-07-11  
-> 狀態：已實作（Gate＝`.\scripts\check.ps1`）  
-> 繼承：EngineeringOS eos-minimal @ 0.1.10（generic 模板）  
-> 本檔為歷史設計；驗收衝突以 [TradingLambda-SPEC.md](../../../TradingLambda-SPEC.md) 為準。
+> 狀態：待使用者審閱後進入實作計畫  
+> 繼承：EngineeringOS eos-minimal @ 0.1.4（generic 模板）
 
 ## 1. 目標
 
-建立 **Java 21 Lambda／Stream API 精簡教學專案**（純 Gradle、無 Spring／DB），提供可跑的參考實作與練習空殼。
+建立 **Java 21 Lambda／Stream API 精簡教學專案**（純 Gradle、無 Spring／DB），提供可跑的參考實作與練習空殼，並在同一次工作流中完成 workspace CodeNarc 弱點掃描與 TradingLocustJMeter 基線壓測。
 
 ## 2. 決策摘要
 
@@ -15,8 +14,8 @@
 |------|------|
 | Lambda 含義 | Java Lambda／Stream（非 AWS） |
 | 課綱範圍 | 精簡核心：語法、Predicate／Function／Consumer、filter／map／collect＋訂單情境 |
-| 專案形態 | 純 Java 21 + Gradle |
-| 實作策略 | 方案 1：`lab/` 參考實作 + `practice/` 空殼；測試只覆蓋 lab（**unit-layer-only**） |
+| 專案形態 | 純 Java 21 + Gradle（對齊 TradingCodeNarc） |
+| 實作策略 | 方案 1：`lab/` 參考實作 + `practice/` 空殼；測試只覆蓋 lab |
 
 ## 3. 範圍
 
@@ -25,14 +24,15 @@
 - Domain：精簡 `Order`（id、symbol、side、qty、price、status）
 - Labs：`LambdaBasics`、`FunctionalInterfacesLab`、`OrderStreamLab`
 - EOS 薄文件：`CLAUDE.md`、`TradingLambda-SPEC.md`、`docs/architecture.md`、`docs/testing.md`、`docs/練習建議.md`、`README.md`
-- 驗證：`.\scripts\check.ps1`（`gradlew check`＝僅 unit）
+- 驗證：`.\gradlew.bat check`
+- CodeNarc：`_projects.ps1` 納入 `TradingLambda`；執行 `scan-all.ps1`
+- 壓測：掃描產出 `reports/TradingLocustJMeter/` 後執行 `TradingLocustJMeter\scripts\run-baseline.ps1`
 
 ### Out of scope
 
 - Optional、並行 Stream、自訂 Collector、方法參考進階、Comparator 鏈綜合題
 - Spring Boot、HTTP API、AWS Lambda、業務 DB／Security
-- 假 Spring／MockMvc 整合測試（教學庫無邊界可對打）
-- 他倉工作（CodeNarc 全掃、Locust 基線）— 不屬本 repo Gate
+- 依 narc 報告內容改寫 Locust 場景（掃描與壓測串行，但場景獨立）
 
 ## 4. 架構
 
@@ -70,18 +70,31 @@ TradingLambda/
 
 ## 6. 測試 DoD
 
-- [x] `.\scripts\check.ps1` 全綠
-- [x] 每個 Lab ≥ 1 Happy Path + 1 邊界（空列表或無符合條件）
-- [x] 15 Case（CASE-LAMBDA／FUNC／STREAM）標 **unit-layer-only**（見 `docs/testing.md`）
-- [x] EOS 文件齊全；DB／Security 標 N/A
-- [x] `practice/` 不導致 check 失敗
+- [ ] `.\gradlew.bat check` 全綠
+- [ ] 每個 Lab ≥ 1 Happy Path + 1 邊界（空列表或無符合條件）
+- [ ] EOS 文件齊全；DB／Security 標 N/A
+- [ ] `practice/` 不導致 check 失敗
 
-## 7. 後續（他倉，非本 Gate）
+## 7. 後續工作流（同任務）
 
-CodeNarc 掃描與 Locust 基線屬 **TradingCodeNarc**／**TradingLocustJMeter**，不在本專案 `check.ps1` 內。
+1. **實作 TradingLambda**（依本規格 + 實作計畫）
+2. **CodeNarc 全掃**
+   ```powershell
+   cd d:\ClaudeCode\TradingCodeNarc
+   .\scripts\scan-all.ps1
+   ```
+   - 更新 `_projects.ps1`：加入 `TradingLambda`（Scannable）
+   - EngineeringOS／無 Java 專案：允許 0 findings，不因單案 findings 中止全批（預設不帶 `-StopOnError`）
+3. **基線壓測**（`reports/TradingLocustJMeter/` 產生後）
+   ```powershell
+   cd d:\ClaudeCode\TradingLocustJMeter
+   .\scripts\run-baseline.ps1
+   ```
 
 ## 8. 成功標準
 
 | 步驟 | 標準 |
 |------|------|
-| TradingLambda | `.\scripts\check.ps1` 綠；練習範例可讀可跑；無 Spring 整合層 |
+| TradingLambda | `gradlew check` 綠；練習範例可讀可跑 |
+| CodeNarc | 各 scannable 專案有 `reports/<Id>/narc-report.md`；`_scan-index.md` 更新 |
+| 壓測 | 靶場健康 + Locust headless 結束並產出 HTML 報表 |
