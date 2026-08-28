@@ -1,6 +1,6 @@
-# TradingLambda — 專案規則（薄）
+﻿# TradingLambda — 專案規則（薄）
 
-繼承：EngineeringOS eos-minimal @ **0.1.10**  
+繼承：EngineeringOS eos-minimal @ **0.1.13**  
 公版：`EngineeringOS/eos-minimal/`  
 權威規格：[TradingLambda-SPEC.md](TradingLambda-SPEC.md)
 
