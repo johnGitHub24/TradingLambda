@@ -5,10 +5,10 @@ import java.util.Objects;
 
 /**
  * 【職責】一筆精簡交易訂單（教學用領域模型）。
- * 【技巧】不可變物件（immutable）：欄位皆 {@code final}，建構後不能改；用方法參考時較安全。
- * 【概念】真實系統訂單欄位更多（帳戶、時間、部分成交…）。這裡只留練習 Lambda／Stream 需要的欄位，
- *         避免初學者被業務細節淹沒。金額用 {@link BigDecimal} 而非 {@code double}，避免浮點誤差。
- * 【邊界】不負責持久化、風控、撮合；僅記憶體內資料載體。
+ * <p>【技巧】不可變物件（immutable）：欄位皆 {@code final}，建構後不能改；用方法參考時較安全。
+ * <p>【概念】真實系統訂單欄位更多（帳戶、時間、部分成交…）。這裡只留練習 Lambda／Stream 需要的欄位，
+ * <br>避免初學者被業務細節淹沒。金額用 {@link BigDecimal} 而非 {@code double}，避免浮點誤差。
+ * <p>【邊界】不負責持久化、風控、撮合；僅記憶體內資料載體。
  */
 public final class Order {
 
@@ -21,8 +21,8 @@ public final class Order {
 
     /**
      * 【職責】建立一筆訂單；必要欄位不可為 null。
-     * 【技巧】{@link Objects#requireNonNull} 在建構當下失敗，避免之後 NPE 難追。
-     * 【概念】「盡早失敗」：壞資料一進來就擋，不要讓半殘物件流進 Stream 管道。
+     * <p>【技巧】{@link Objects#requireNonNull} 在建構當下失敗，避免之後 NPE 難追。
+     * <p>【概念】「盡早失敗」：壞資料一進來就擋，不要讓半殘物件流進 Stream 管道。
      *
      * @param id       訂單識別
      * @param symbol   商品代碼，如 AAPL
@@ -72,9 +72,9 @@ public final class Order {
 
     /**
      * 【職責】計算名目金額 = 單價 × 數量。
-     * 【技巧】{@link BigDecimal#multiply}；數量先轉成 BigDecimal。
-     * 【概念】名目（notional）常出現在風控「這筆單曝險多大」。之後可用方法參考 {@code Order::notional}
-     *         當成 {@code Function}，不必每次手寫乘法。
+     * <p>【技巧】{@link BigDecimal#multiply}；數量先轉成 BigDecimal。
+     * <p>【概念】名目（notional）常出現在風控「這筆單曝險多大」。之後可用方法參考 {@code Order::notional}
+     * <br>當成 {@code Function}，不必每次手寫乘法。
      *
      * @return 名目金額（不為 null）
      */

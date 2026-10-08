@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * 【職責】驗證 Predicate／Function／Consumer 行為與組合使用。
- * 【技巧】{@code Predicate.test}、{@code Function.apply}、Consumer 副作用收集。
- * 【概念】先測「介面物件本身」，再測「用它們組出來的方法」，對應學習順序。
+ * <p>【技巧】{@code Predicate.test}、{@code Function.apply}、Consumer 副作用收集。
+ * <p>【概念】先測「介面物件本身」，再測「用它們組出來的方法」，對應學習順序。
  */
 class FunctionalInterfacesLabTest {
 
@@ -25,7 +25,7 @@ class FunctionalInterfacesLabTest {
 
     /**
      * CASE-FUNC-001：fillable 只接受 PENDING。
-     * 【技巧驗證】Predicate Lambda。
+     * <p>【技巧驗證】Predicate Lambda。
      */
     @Test
     void fillable_acceptsPendingOnly() {
@@ -43,7 +43,7 @@ class FunctionalInterfacesLabTest {
 
     /**
      * CASE-FUNC-003：notional Function 計算 qty×price。
-     * 【技巧驗證】方法參考 Order::notional。
+     * <p>【技巧驗證】方法參考 Order::notional。
      */
     @Test
     void notional_multipliesQtyAndPrice() {
@@ -63,7 +63,7 @@ class FunctionalInterfacesLabTest {
 
     /**
      * CASE-FUNC-005：Consumer 把元素加入外部 List。
-     * 【技巧驗證】collector::add 副作用。
+     * <p>【技巧驗證】collector::add 副作用。
      */
     @Test
     void collectInto_appendsViaConsumer() {

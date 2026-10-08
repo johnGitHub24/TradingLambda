@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * 【職責】驗證 {@link LambdaBasics} 的過濾／排序／格式化。
- * 【技巧】JUnit 5 {@code @Test}；用固定 fixture 訂單當 Given。
- * 【概念】教學測試同時當「規格說明」：讀測試名稱就知道 Lab 保證什麼行為。
+ * <p>【技巧】JUnit 5 {@code @Test}；用固定 fixture 訂單當 Given。
+ * <p>【概念】教學測試同時當「規格說明」：讀測試名稱就知道 Lab 保證什麼行為。
  */
 class LambdaBasicsTest {
 
@@ -24,8 +24,8 @@ class LambdaBasicsTest {
 
     /**
      * CASE-LAMBDA-001：依 PENDING 過濾，只留兩筆。
-     * Given: 三筆不同狀態；When: filterByStatus(PENDING)；Then: id 1 與 3。
-     * 【技巧驗證】forEach + Lambda 條件。
+     * <br>Given: 三筆不同狀態；When: filterByStatus(PENDING)；Then: id 1 與 3。
+     * <p>【技巧驗證】forEach + Lambda 條件。
      */
     @Test
     void filterByStatus_keepsMatchingOrders() {
@@ -39,7 +39,7 @@ class LambdaBasicsTest {
 
     /**
      * CASE-LAMBDA-002：空列表邊界。
-     * Given: 空；When: filter；Then: 空（不拋例外）。
+     * <br>Given: 空；When: filter；Then: 空（不拋例外）。
      */
     @Test
     void filterByStatus_emptyInput_returnsEmpty() {
@@ -48,7 +48,7 @@ class LambdaBasicsTest {
 
     /**
      * CASE-LAMBDA-003：依 price 升冪排序。
-     * 【技巧驗證】Comparator.comparing(Order::price)。
+     * <p>【技巧驗證】Comparator.comparing(Order::price)。
      */
     @Test
     void sortByPriceAsc_ordersByPrice() {

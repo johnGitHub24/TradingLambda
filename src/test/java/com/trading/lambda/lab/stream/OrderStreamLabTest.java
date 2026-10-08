@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * 【職責】驗證 Stream filter／map／reduce／groupingBy。
- * 【技巧】斷言 List／Map／BigDecimal；空輸入邊界。
- * 【概念】每個測試對應管線上的一個「終端結果」，方便對照 Lab 原始碼閱讀。
+ * <p>【技巧】斷言 List／Map／BigDecimal；空輸入邊界。
+ * <p>【概念】每個測試對應管線上的一個「終端結果」，方便對照 Lab 原始碼閱讀。
  */
 class OrderStreamLabTest {
 
@@ -26,7 +26,7 @@ class OrderStreamLabTest {
 
     /**
      * CASE-STREAM-001：pendingBuys = BUY AND PENDING。
-     * 【技巧驗證】雙 filter。
+     * <p>【技巧驗證】雙 filter。
      */
     @Test
     void pendingBuys_filtersBuyAndPending() {
@@ -56,7 +56,7 @@ class OrderStreamLabTest {
 
     /**
      * CASE-STREAM-004：reduce 加總。
-     * 【技巧驗證】BigDecimal::add。
+     * <p>【技巧驗證】BigDecimal::add。
      */
     @Test
     void totalNotional_sumsAll() {
@@ -74,7 +74,7 @@ class OrderStreamLabTest {
 
     /**
      * CASE-STREAM-006：依 symbol 分組。
-     * 【技巧驗證】Collectors.groupingBy。
+     * <p>【技巧驗證】Collectors.groupingBy。
      */
     @Test
     void groupBySymbol_groupsOrders() {
